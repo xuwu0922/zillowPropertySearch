@@ -1,0 +1,477 @@
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Real Estate Search</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css"/>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js"> </script>
+  
+ <style>
+ body {
+        padding:30px;
+		background-image:url(http://www.neovisual.cz/files/V0779-d9.jpg);
+		}
+		
+.carousel-caption {
+        position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 15px;
+    text-align: left;
+	
+	
+	background: rgba(0, 0, 0, 0.25);
+}	
+
+.carousel-indicators li {
+  background-color: #FF8000;
+  background-color: rgba(70,70,70,.25);
+
+}
+
+.carousel-indicators{
+    left:80%;
+    
+}
+
+.carousel-indicators .active {
+  background-color: #FF8000;
+}
+		
+ </style>
+
+</head>
+
+<body>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '735349969875785',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<h3 style="color:#FF8000">Search Your Property Here</h3>
+<br></br>
+
+<form class="form-inline registerForm">
+    <div class="form-group">
+        <label class="control-label" style="color:#FF8000">Street Address:</label>
+        <input type="text" class="form-control" name="address" id="address" placeholder="Address" />
+    </div>
+	
+	<div class="form-group">
+		<label class="control-label" style="color:#FF8000">City:</label>
+        <input type="text" class="form-control" name="city" id="city" placeholder="City" />
+    </div>
+	
+    <div class="form-group">	
+		<label class="control-label" style="color:#FF8000">State:</label>
+		<select class="form-control" name="state" id="state"> 
+             
+				<option selected="selected" ></option>
+				<option value="AL">AL</option>
+				<option value="AK">AK</option>
+				<option value="AZ">AZ</option>
+				<option value="AR">AR</option>
+				<option value="CA">CA</option>
+				<option value="CO">CO</option>
+				<option value="CT">CT</option>
+				<option value="DE">DE</option>
+				<option value="DC">DC</option>
+				<option value="FL">FL</option>
+				<option value="GA">GA</option>
+				<option value="HI">HI</option>
+				<option value="ID">ID</option>
+				<option value="IL">IL</option>
+				<option value="IN">IN</option>
+				<option value="IA">IA</option>
+				<option value="KS">KS</option>
+				<option value="KY">KY</option>
+				<option value="LA">LA</option>
+				<option value="ME">ME</option>
+				<option value="MD">MD</option>
+				<option value="MA">MA</option>
+				<option value="MI">MI</option>
+				<option value="MN">MN</option>
+				<option value="MS">MS</option>
+				<option value="MO">MO</option>
+				<option value="MT">MT</option>
+				<option value="NE">NE</option>
+				<option value="NV">NV</option>
+				<option value="NH">NH</option>
+				<option value="NJ">NJ</option>
+				<option value="NM">NM</option>
+				<option value="NY">NY</option>
+				<option value="NC">NC</option>
+				<option value="ND">ND</option>
+				<option value="OH">OH</option>
+				<option value="OK">OK</option>
+				<option value="OR">OR</option>
+				<option value="PA">PA</option>
+				<option value="RI">RI</option>
+				<option value="SC">SC</option>
+				<option value="SD">SD</option>
+				<option value="TN">TN</option>
+				<option value="TX">TX</option>
+				<option value="UT">UT</option>
+				<option value="VT">VT</option>
+				<option value="VA">VA</option>
+				<option value="WA">WA</option>
+				<option value="WV">WV</option>
+				<option value="WI">WI</option>
+				<option value="WY">WY</option>
+				
+			</select>
+    </div>
+		
+		<div class="form-group">
+           <button type="submit" id="btt" class="btn btn-default form-control" style="background-color:	#FF9224; color:white" >Submit</button>
+        </div>
+		
+	<img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_150x40_rounded.gif" width="150" height="40" alt="Zillow Real Estate Search" align="right"/>
+</form>
+<br></br>
+
+<HR>
+
+
+<script>
+$(document).ready(function() {
+  $('.registerForm').bootstrapValidator({
+
+    
+    fields: {
+      address: {
+        validators: {
+          notEmpty: {
+            message: 'The field is required'
+          }
+        }
+      },
+      city: {
+        validators: {
+          notEmpty: {
+            message: 'The field is required'
+          }
+        }
+      },
+	  state: {
+        validators: {
+          notEmpty: {
+            message: 'The field is required'
+          }
+        }
+      }
+      
+    }
+  });
+});
+ </script>
+
+<script>
+$(document).ready(function(){
+
+
+  $(".registerForm").submit(function(e){
+  if($("#address").val()!=""&&$("#city").val()!=""&&$("#state").val()!="")
+  {
+ $.ajax({
+     type:'GET',
+	 // url:'http://robotwish-env.elasticbeanstalk.com/xuwuhw8.php',
+	 url:'zillowBackdb.php',
+	 data:{address:$("#address").val(),
+	       city:$("#city").val(),
+		   state:$("#state").val()},
+	 dataType:'json',
+     success:function(data){
+	 
+	 
+	        $('#show').empty(); 
+	 if(data.message=="Error: no exact match found for input address")
+	 {
+	 var html='<center><h3 style="color:red">No exact match found--Verify that the given address is correct.</h3></center>';
+	 }
+	 else{
+	         var html='<ul class="nav nav-tabs" role="tablist" ><li role="presentation" class="active" ><a href="#info" aria-controls="info" role="tab" data-toggle="tab" >';
+	         html+="Basic Info";
+			 html+='</a></li><li role="presentation" ><a href="#charts" aria-controls="charts" role="tab" data-toggle="tab" >';
+	         html+="Historical Zestimates";
+			 html+='</a></li></ul>';
+			 html+='<div class="tab-content" style="background-color:white"><div role="tabpanel" class="tab-pane active" id="info" style="padding:30px"><table class="table table-striped" border="0" style="background-color:white; color:black" >';
+			 
+			 html+='<tr><td colspan="2">';
+             html+='<p>See more details for <a href="';
+			 html+=data.homedetails;
+			 html+='">'+data.street+", "+data.city+", "+data.state+"-"+data.zipcode+'</a> on Zillow</p>';
+		     
+			 html+='</td><td colspan="2" style="text-align:right;">';
+			 html+='<button onclick="shareonfb()" style="background-color:#627aac; color:white; height:40px">Share on Facebook</button>';
+			fblink=data.homedetails;
+            fboutput1=data.street+", "+data.city+", "+data.state+"-"+data.zipcode;
+			fboutput2="Last Sold Priice:"+data.lastSoldPrice+", 30 Days Overall Change:"+data.estimateValueChange;
+			fbimage=data.oneyearimage;
+			 
+			 html+='</td></tr>';
+			 
+			
+			 
+			 html+='<tr><td width="300px;">';
+			 html+="Property Type:";
+			 html+='</td><td style="text-align:right;" width="300px;">';
+			 html+=data.useCode;
+			 html+='</td><td width="500px;">';
+			 html+="Last Sold Price:";
+			 html+='</td><td style="text-align:right;" width="400px;">';
+			 html+=data.lastSoldPrice;
+			 html+='</td></tr><tr><td>';
+			 
+			 html+="Year Built:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.yearBuilt;
+			 html+='</td><td>';
+			 html+="Last Sold Date:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.lastSoldDate;
+			 html+='</td></tr><tr><td>';
+			 
+			 html+="Lot Size:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.lotSizeSqFt;
+			 html+='</td><td>';
+			 html+="Zestimate &reg Property Estimate as of "+data.estimateLastUpdate;
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.estimateAmount;
+			 html+='</td></tr><tr><td>';
+			 
+			 html+="Finished Area:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.finishedSqFt;
+			 html+='</td><td>';
+			 html+="30 Days Overall Change";
+			 if(data.estimateValueChangeSign=="+")
+			 {
+			  html+='<img src='
+			 html+=data.imgp;
+			 html+='>';
+             }
+			 else
+			 {
+			  html+='<img src='
+			 html+=data.imgn;
+			 html+='>';
+             }
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.estimateValueChange;
+			 html+='</td></tr><tr><td>';
+			 
+			 html+="Bathrooms:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.bathrooms;
+			 html+='</td><td>';
+			 html+="All Time Property Range:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.estimateValuationRangeLow;
+			 html+=' - ';
+			 html+=data.estimateValuationRangeHigh;
+			 html+='</td></tr><tr><td>';
+
+			 html+="Bedrooms:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.bedrooms;
+			 html+='</td><td>';
+			 html+="Rent Zestimate &reg Valuation as of "+data.restimateLastUpdate;
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.restimateAmount;
+			 html+='</td></tr><tr><td>';
+			 
+			 html+="Tax Assessment Year:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.taxAssessmentYear;
+			 html+='</td><td>';
+			 html+="30 Days Rent Change";
+			 if(data.restimateValueChangeSign=="+")
+			 {
+			  html+='<img src='
+			 html+=data.imgp;
+			 html+='>';
+             }
+			 else
+			 {
+			  html+='<img src='
+			 html+=data.imgn;
+			 html+='>';
+             }
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.restimateValueChange;
+			 html+='</td></tr><tr><td>';
+			 
+			 html+="Tax Assessment:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.taxAssessment;
+			 html+='</td><td>';
+			 html+="All Time Rent Range:";
+			 html+='</td><td style="text-align:right;">';
+			 html+=data.restimateValuationRangeLow;
+			 html+=' - ';
+			 html+=data.restimateValuationRangeHigh;
+			 
+			 html+='</td></tr></table></div><div role="tabpanel" class="tab-pane" id="charts">';
+			 
+			 
+		
+
+            
+ html+='<div style="margin:0 auto;"><div id="carousel-example-generic" class="carousel slide" data-ride="carousel">';
+      html+='<ol class="carousel-indicators">';
+        html+='<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>';
+        html+='<li data-target="#carousel-example-generic" data-slide-to="1"></li>';
+        html+='<li data-target="#carousel-example-generic" data-slide-to="2"></li></ol>';
+			 
+		html+='<div class="carousel-inner" role="listbox"><div class="item active"><center><img src=';
+		html+=data.oneyearimage;
+		html+=' alt="First slide"></center>';
+		html+='<div class="carousel-caption"><h3>';
+		html+="Historical Zestimates for the past 1 year";
+		html+='</h3><p>';
+		html+=data.street+", "+data.city+", "+data.state+"-"+data.zipcode;
+		html+='</p></div></div>';
+		
+        html+='<div class="item"><center><img src=';
+		html+=data.fiveyearimage;
+		html+=' alt="Second slide"></center>';
+		html+='<div class="carousel-caption"><h3>';
+		html+="Historical Zestimates for the past 5 years";
+		html+='</h3><p>';
+		html+=data.street+", "+data.city+", "+data.state+"-"+data.zipcode;
+		html+='</p></div></div>';
+		
+		
+			 		
+		
+        html+='<div class="item"><center><img src=';
+		html+=data.tenyearimage;
+		html+=' alt="Third slide"></center>';
+		html+='<div class="carousel-caption"><h3>';
+		html+="Historical Zestimates for the past 10 years";
+		html+='</h3><p>';
+		html+=data.street+", "+data.city+", "+data.state+"-"+data.zipcode;
+		html+='</p></div></div></div>';
+		
+		  html+='<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">';
+    html+='<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>';
+    html+='<span class="sr-only">';
+	html+="Previous";
+	html+='</span></a>';
+  html+='<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">';
+    html+='<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>';
+    html+='<span class="sr-only">';
+	html+="Next";
+	html+='</span></a></div></div>';
+
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			
+	html+='</div>';
+	html+='</div>';
+	
+	}
+			  $('#show').append(html);   
+			 }
+			 
+			
+   });
+ 
+ return false;
+ }
+   });
+   
+
+
+   })
+  
+ 
+ </script>
+
+
+
+<div id="show" role="tabpanel"></div>
+
+<br><br>
+<center style="color:white">&copy Zillow, Inc., 2006-2014. Use is subject to<a href="http://www.zillow.com/corp/Terms.htm" 	style="color:#FF9224">Terms of Use</a><center>
+<center><a href="http://www.zillow.com/zestimate/" style="color:#FF9224">What's a Zestimate</a></center>
+
+<script>
+function shareonfb() {
+  FB.ui({
+    method: 'feed',
+    link: fblink,
+    picture: fbimage,
+    name: fboutput1,
+    caption: 'Property information from Zillow.com',
+    description: fboutput2
+  },
+  function(response) {
+    if (response && !response.error_code) {
+      alert('Posted Sucessfully.');
+    } else {
+      alert('Posting Failed.');
+    }
+  }
+  
+  );
+}
+  
+</script>
+
+
+
+
+
+				
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<noscript>
+</body>
+</html>
